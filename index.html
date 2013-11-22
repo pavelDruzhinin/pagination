@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+
+<head>
+  <link href="css/pagination.css" rel="stylesheet">
+</head>
+<body>
+<h2>Pagination</h2>
+<div id="pag" class="pagination"></div>
+<br />
+<div id="pag1" class="pagination"></div>
+<br />
+<input type="button" id="synchronize" value="synchronize"/>
+
+<script src="js/native.pagination.js"></script>
+<script>
+        options = {
+            showpages: 10, totalpages: 15, actionButton: function (current) {
+                alert(current);
+            }
+        };
+
+        var options2 = {
+            showpages: 5,
+            totalpages: 10
+        };
+
+        var pg = new Pagination("pag", options);
+
+        var pg2 = new Pagination("pag1", options);
+		
+		var synchronize = document.getElementById("synchronize");
+		synchronize.onclick = function(){
+			pg.synchronize([pg2]);
+		};
+</script>
+</body>

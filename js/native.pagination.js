@@ -1,40 +1,10 @@
-﻿if (!Object.prototype.watch) {
-    Object.defineProperty(Object.prototype, "watch", {
-        enumerable: false
-		, configurable: true
-		, writable: false
-		, value: function (prop, handler) {
-		    var
-			  oldval = this[prop]
-			, newval = oldval
-			, getter = function () {
-			    return newval;
-			}
-			, setter = function (val) {
-			    oldval = newval;
-			    return newval = handler.call(this, prop, oldval, val);
-			}
-		    ;
-
-		    if (delete this[prop]) { // can't watch constants
-		        Object.defineProperty(this, prop, {
-		            get: getter
-					, set: setter
-					, enumerable: true
-					, configurable: true
-		        });
-		    }
-		}
-    });
-}
-
-function Pagination(divId, options) {
+﻿function Pagination(divId, options) {
 
     var self = this;
     self.current = 1;
     self.action = 0;
-    var start = ["Начало", "Назад"];
-    var end = ["Дальше", "В конец"];
+    var start = ["Start", "Back"];
+    var end = ["Next", "End"];
 
     //var startPage = 0;
     var show = 10, total = 15, action, endPage = 10;
@@ -228,16 +198,16 @@ function Pagination(divId, options) {
         var value;
 
         switch (text) {
-            case "Начало":
+            case "Start":
                 value = 1;
                 break;
-            case "Назад":
+            case "Back":
                 value = self.current == 1 ? self.current : self.current - 1;
                 break;
-            case "Дальше":
+            case "Next":
                 value = self.current == total ? self.current : self.current + 1;
                 break;
-            case "В конец":
+            case "End":
                 value = total;
                 break;
             default:
